@@ -1,5 +1,10 @@
 package com.test.thread.p_c_allwait;
 
+/**
+ * 线程假死
+ * @author Administrator
+ *
+ */
 public class Run {
 
 	public static void main(String[] args) throws InterruptedException {
