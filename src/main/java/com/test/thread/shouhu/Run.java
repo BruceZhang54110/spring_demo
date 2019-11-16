@@ -1,5 +1,10 @@
 package com.test.thread.shouhu;
 
+/**
+ * 守护线程
+ * @author Administrator
+ *
+ */
 public class Run {
 
 	public static void main(String[] args) {
