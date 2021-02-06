@@ -20,6 +20,7 @@ public class GenericTest {
 
         GenericTest test = new GenericTest();
         test.test(new ArrayList<String>(Arrays.asList(new String[]{"1","2"})));
+
     }
 
     /**

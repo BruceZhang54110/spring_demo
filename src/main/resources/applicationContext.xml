@@ -21,9 +21,9 @@
 		class: bean 的全类名, 通过反射的方式在IOC容器中创建 Bean. 所以要求Bean中必须有无参的构造器
 		id: 标示容器中的bean. id唯一。	
 	 -->
-	<bean id="helloWorld" class="com.at.spring.beans.HelloWorld">
+<!--	<bean id="helloWorld" class="com.at.spring.beans.HelloWorld">
 		<property name="name2" value="Spring"></property>
-	</bean>
+	</bean>-->
 	
 	<!-- 通过构造方法来配置bean的属性 -->
 	<bean id="car" class="com.at.spring.beans.Car">
