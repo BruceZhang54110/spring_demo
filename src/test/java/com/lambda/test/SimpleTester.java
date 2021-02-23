@@ -21,4 +21,5 @@ public class SimpleTester {
 		// 3、使用lambda表达式
 		names.forEach(System.out::println);
 	}
+
 }
