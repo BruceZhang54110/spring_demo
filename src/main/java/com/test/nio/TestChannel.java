@@ -4,9 +4,13 @@ import org.junit.Test;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
@@ -153,6 +157,35 @@ public class TestChannel {
         for(Map.Entry<String, Charset> entry: entries) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+
+    }
+
+    @Test
+    public void test6() throws CharacterCodingException {
+        Charset cs1 = Charset.forName("GBK");
+        // 获取编码器
+        CharsetEncoder ce = cs1.newEncoder();
+        // 获取解码器
+        CharsetDecoder cd = cs1.newDecoder();
+
+        CharBuffer cBuffer = CharBuffer.allocate(1024);
+        cBuffer.put("人民威武！");
+        cBuffer.flip();
+        //编码
+        ByteBuffer byteBuffer = ce.encode(cBuffer);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(byteBuffer.get());
+        }
+
+        // 解码
+        byteBuffer.flip();
+        CharBuffer charBuffer = cd.decode(byteBuffer);
+        System.out.println(charBuffer.toString());
+        System.out.println("---------------------------------------------------");
+        Charset charsetUTF8 = Charset.forName("UTF-8");
+        byteBuffer.flip();
+        CharBuffer c2Buffer = charsetUTF8.decode(byteBuffer);
+        System.out.println(c2Buffer.toString());
 
     }
     
