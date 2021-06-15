@@ -14,7 +14,10 @@ public class ThreadPoolDemo {
 		Future<String> future = newCachedThreadPool.submit(new MyCallable());
 		if (!future.isDone()) {
 			System.out.println("task has not finished please wait.");
+		} else {
+			System.out.println("ssssssssssssssss");
 		}
+		System.out.println("wwwwwwwwwwwwwww");
 		try {
 			System.out.println("task return: " + future.get());
 		} catch (InterruptedException e) {
