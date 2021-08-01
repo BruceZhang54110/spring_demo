@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-	<bean id="message" class="com.test.entity.Message">
+	<bean id="message" class="com.test.entity.Message" scope="singleton" lazy-init="false">
 	 	<property name="id" value="1"></property>
 	 	<property name="mess" value="aaaa"></property>
 	</bean>
