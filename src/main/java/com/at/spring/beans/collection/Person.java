@@ -17,7 +17,7 @@ public class Person {
 	}
 
 	public void setName(String name) {
-		System.out.println("set ....");
+		System.out.println("set name....");
 		this.name = name;
 	}
 

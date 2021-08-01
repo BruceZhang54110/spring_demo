@@ -26,5 +26,13 @@ public class Message {
 	public void printMessage() {
 		System.out.println(this.getId()+","+this.getMess());
 	}
-	
+
+	public Message(Integer id, String mess) {
+		this.id = id;
+		this.mess = mess;
+	}
+
+	public Message() {
+		System.out.println("message 无参构造方法");
+	}
 }

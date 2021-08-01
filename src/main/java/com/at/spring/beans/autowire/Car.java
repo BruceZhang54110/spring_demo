@@ -20,6 +20,15 @@ public class Car {
 	public String toString() {
 		return "Car [brand=" + brand + ", price=" + price + "]";
 	}
-	
 
+
+	public Car() {
+		System.out.println("Car 无参构造方法");
+	}
+
+	public Car(String brand, double price) {
+		System.out.println("Car 有参构造方法");
+		this.brand = brand;
+		this.price = price;
+	}
 }
