@@ -25,7 +25,7 @@ public class GroupChatServer {
             // 注册
             listenChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -42,7 +42,7 @@ public class GroupChatServer {
                Iterator<SelectionKey> keysIterator = selector.selectedKeys().iterator();
                while (keysIterator.hasNext()) {
                    SelectionKey selectionKey = keysIterator.next();
-                   if (selectionKey.isAcceptable()) {
+                   if (selectionKey.isAcceptable()) { // 如果是连接事件
                        SocketChannel sc = listenChannel.accept();
                        sc.configureBlocking(false);
                        sc.register(selector, SelectionKey.OP_READ);
@@ -64,6 +64,7 @@ public class GroupChatServer {
 
     }
 
+    // 读取客户端消息
     private void readData(SelectionKey key) {
         // 定义一个SocketChannel
         SocketChannel channel = null;
