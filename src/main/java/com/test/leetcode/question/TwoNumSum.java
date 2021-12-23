@@ -25,25 +25,23 @@ import java.util.Map;
 public class TwoNumSum {
 
 	public static void main(String[] args) {
-		int[] nums = new int[] {2, 7, 11, 15};
-		int result[] = twoNum(nums, 9);
+		int[] nums = new int[] {2, 2, 4, 15};
+		int result[] = twoNum(nums, 4);
 		for (int i : result) {
 			System.out.println(i);
 		}
 	}
 	
 	public static int[] twoNum(int[] nums, int target) {
-		Map<Integer, Integer> map = new HashMap<>();
-		for (int i = 0; i < nums.length; i++) {
-			map.put(nums[i], i);
-		}
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>(nums.length);
 		for (int i = 0; i < nums.length; i++) {
 			int complement = target - nums[i];
-			if (map.containsKey(complement) && map.get(complement) != i) {
+			if (map.containsKey(complement)) {
 				return new int[] {i, map.get(complement)};
 			}
+			map.put(nums[i], i);
 		}
-		throw new IllegalArgumentException("No two sum solution"); 
+		return new int[0];
 		
 	}
 }

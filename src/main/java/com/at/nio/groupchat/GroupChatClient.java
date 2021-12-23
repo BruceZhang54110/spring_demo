@@ -7,7 +7,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class GroupChatClient {
     private static final String HOST = "127.0.0.1"; // 服务器Ip
@@ -24,7 +26,7 @@ public class GroupChatClient {
 
         selector = Selector.open();
         // 连接服务器
-        socketChannel.open(new InetSocketAddress("127.0.0.1", PORT));
+        socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", PORT));
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
         userName =socketChannel.getLocalAddress().toString().substring(1);
@@ -55,9 +57,10 @@ public class GroupChatClient {
                         String msg = new String(buffer.array());
                         System.out.println(msg.trim());
                     }
+                    iterator.remove();
                 }
             } else {
-                System.out.println("没有可用通道");
+                System.out.println(userName + "：客户端没有可用通道");
             }
 
         } catch (IOException e) {
@@ -65,5 +68,28 @@ public class GroupChatClient {
         }
 
     }
-    
+
+    public static void main(String[] args) throws Exception {
+        // 启动客户端
+        GroupChatClient chatClient = new GroupChatClient();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    chatClient.readInfo();
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+        // 发送数据给服务器端
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
+            chatClient.sendInfo(scanner.nextLine());
+        }
+    }
 }

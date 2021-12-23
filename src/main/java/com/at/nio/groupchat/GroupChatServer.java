@@ -114,7 +114,8 @@ public class GroupChatServer {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        GroupChatServer server = new GroupChatServer();
+        server.listen();
     }
 }

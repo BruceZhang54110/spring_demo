@@ -11,7 +11,7 @@ import java.util.Set;
 public class TestBeanFactoryProcessor {
     public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans-beanFactoryPostProcessor.xml");
-        BeanFactoryPostProcessor bfpp = (BeanFactoryPostProcessor) classPathXmlApplicationContext.getBean("bfpp");
+        // BeanFactoryPostProcessor bfpp = (BeanFactoryPostProcessor) classPathXmlApplicationContext.getBean("bfpp");
         //bfpp.postProcessBeanFactory(classPathXmlApplicationContext.getBeanFactory());
         System.out.println(classPathXmlApplicationContext.getBean("car"));
 

@@ -11,6 +11,7 @@ import java.nio.channels.FileChannel;
  */
 public class NIOFileChannel01 {
     public static void main(String[] args) throws IOException {
+
         String str = "hello, world";
         // 创建输出流
         final FileOutputStream fileOutputStream = new FileOutputStream("d:\\file01.txt");
