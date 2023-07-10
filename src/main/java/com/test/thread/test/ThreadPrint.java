@@ -4,7 +4,7 @@ package com.test.thread.test;
  * 多线程顺序打印ABC
  */
 public class ThreadPrint {
-    private  static int state = 0;
+    private volatile static int state = 0;
     private static String lock = "1";
 
     public static void main(String[] args) {

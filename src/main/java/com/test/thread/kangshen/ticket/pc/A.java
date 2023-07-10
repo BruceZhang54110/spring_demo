@@ -10,7 +10,7 @@ public class A {
     public static void main(String[] args) {
         Data data = new Data();
         new Thread(()->{
-           for (int i=0 ;i < 10;i++) {
+           for (int i=0 ;i < 100;i++) {
                try {
                    data.increment();
                } catch (InterruptedException e) {
@@ -18,6 +18,7 @@ public class A {
                }
            }
         },"A").start();
+
         new Thread(()->{
             for (int i=0 ;i < 10;i++) {
                 try {
@@ -27,8 +28,8 @@ public class A {
                 }
             }
         },"B").start();
-        new Thread(()->{
-            for (int i=0 ;i < 10;i++) {
+       new Thread(()->{
+            for (int i=0 ;i < 90;i++) {
                 try {
                     data.decrement();
                 } catch (InterruptedException e) {
@@ -36,7 +37,7 @@ public class A {
                 }
             }
         },"C").start();
-        new Thread(()->{
+       /* new Thread(()->{
             for (int i=0 ;i < 10;i++) {
                 try {
                     data.decrement();
@@ -44,13 +45,17 @@ public class A {
                     e.printStackTrace();
                 }
             }
-        },"D").start();
+        },"D").start();*/
     }
 }
 
 class Data {
-    private int number = 0;
+    private volatile int number = 0;
 
+    /**
+     * 模拟生产消息
+     * @throws InterruptedException
+     */
     public synchronized void increment() throws InterruptedException {
         while (number != 0) {
             // 等待
@@ -62,6 +67,10 @@ class Data {
         this.notifyAll();
     }
 
+    /**
+     * 模拟消费消息
+     * @throws InterruptedException
+     */
     public synchronized void decrement() throws InterruptedException {
         while (number == 0) {
             // 等待

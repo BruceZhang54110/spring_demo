@@ -4,7 +4,7 @@ package com.test.thread.test;
  * 多线程顺序打印ABC
  */
 public class ThreadPrint1 {
-    private  static int state = 0;
+    private volatile static int state = 0;
 
     public static void main(String[] args) throws InterruptedException {
         Thread a = new Thread(() -> {

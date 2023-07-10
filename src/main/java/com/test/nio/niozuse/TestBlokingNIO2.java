@@ -1,6 +1,5 @@
 package com.test.nio.niozuse;
 
-import com.sun.tools.doclets.standard.Standard;
 import org.junit.Test;
 
 import java.io.IOException;

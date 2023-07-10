@@ -8,17 +8,17 @@ public class SaleTicketDemo01 {
         // 多线程操作同一個资源类
         Ticket ticket = new Ticket();
         new Thread(()->{
-            for(int i = 0; i < 60; i++) {
+            for(int i = 0; i < 10; i++) {
                 ticket.sale();
             }
         }, "A").start();
         new Thread(()->{
-            for(int i = 0; i < 60; i++) {
+            for(int i = 0; i < 10; i++) {
                 ticket.sale();
             }
         }, "B").start();
         new Thread(()->{
-            for(int i = 0; i < 60; i++) {
+            for(int i = 0; i < 10; i++) {
                 ticket.sale();
             }
         }, "C").start();

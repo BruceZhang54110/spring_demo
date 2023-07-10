@@ -7,9 +7,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * 多线程顺序打印ABC
  */
 public class ThreadPrint2 {
-    private  volatile static int state = 0;
-    private static ReentrantLock reentrantLock = new ReentrantLock();
-    private static Condition condition = reentrantLock.newCondition();
+    private volatile static int state = 0;
+    private static final ReentrantLock reentrantLock = new ReentrantLock();
+    private static final Condition condition = reentrantLock.newCondition();
 
     public static void main(String[] args) {
         new Thread(()->{
