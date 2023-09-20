@@ -12,6 +12,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     /**
      * 当被通知Channel是活跃的时候，发送一条消息
+     * 连接建立时被调用
      * @param ctx
      * @throws Exception
      */

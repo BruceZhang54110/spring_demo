@@ -8,7 +8,7 @@ public class FutureTaskDemo {
 	
 	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		FutureTask<String> futureTask = new FutureTask<String>(new MyCallable());
+		FutureTask<String> futureTask = new FutureTask<>(new MyCallable());
 		new Thread(futureTask).start();
 		if (!futureTask.isDone()) {
 			System.out.println("task has not finished please wait.");
