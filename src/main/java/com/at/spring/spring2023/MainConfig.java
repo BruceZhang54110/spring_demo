@@ -14,4 +14,9 @@ public class MainConfig {
     Person person() {
         return new Person("ddd");
     }
+
+    @Bean
+    Dog dog() {
+        return new Dog("dog");
+    }
 }

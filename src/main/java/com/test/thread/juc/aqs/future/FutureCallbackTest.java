@@ -3,6 +3,7 @@ package com.test.thread.juc.aqs.future;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
@@ -10,7 +11,6 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 public class FutureCallbackTest {
@@ -80,8 +80,8 @@ public class FutureCallbackTest {
     //泡茶线程
     static class MainJob implements Runnable {
 
-        boolean warterOk = false;
-        boolean cupOk = false;
+        volatile boolean warterOk = false;
+        volatile boolean cupOk = false;
         int gap = SLEEP_GAP / 10;
 
         @Override
@@ -144,18 +144,27 @@ public class FutureCallbackTest {
         //创建java 线程池
         ExecutorService jPool = Executors.newFixedThreadPool(10);
         ExecutorService callbackExecutor = Executors.newFixedThreadPool(10, new CustomizableThreadFactory("custom-Callback"));
-
         //包装java线程池，构造guava 线程池
-        ListeningExecutorService gPool =
-                MoreExecutors.listeningDecorator(jPool);
-
+        ListeningExecutorService gPool = MoreExecutors.listeningDecorator(jPool);
         //提交烧水的业务逻辑，取到异步任务
+        ListenableFutureTask<String> stringListenableFutureTask = ListenableFutureTask.create(() -> {
+            System.out.println("dd");
+            return "dd";
+        });
+
+        stringListenableFutureTask.addListener(() -> {
+            System.out.println("a addListener execute");
+        }, callbackExecutor);
+
         ListenableFuture<Boolean> hotFuture = gPool.submit(hotJob);
-        //绑定任务执行完成后的回调，到异步任务
+        hotFuture.addListener(() -> {
+            System.out.println("a addListener execute");
+        }, callbackExecutor);
+        //绑定任务执行完成后的回调，到异步任务，水烧开了，将 warterOk 置为 true
         Futures.addCallback(hotFuture, new FutureCallback<Boolean>() {
             public void onSuccess(Boolean r) {
                 if (r) {
-                    System.out.println("hotFuture 回调， current thread: " + Thread.currentThread().getName());
+                    System.out.println("hotFuture 回调，通知水好了 current thread: " + Thread.currentThread().getName());
                     mainJob.warterOk = true;
                 }
             }
@@ -172,7 +181,7 @@ public class FutureCallbackTest {
         Futures.addCallback(washFuture, new FutureCallback<Boolean>() {
             public void onSuccess(Boolean r) {
                 if (r) {
-                    System.out.println("washFuture 回调， current thread: " + Thread.currentThread().getName());
+                    System.out.println("washFuture 回调，杯子洗好了 current thread: " + Thread.currentThread().getName());
                     mainJob.cupOk = true;
                 }
             }

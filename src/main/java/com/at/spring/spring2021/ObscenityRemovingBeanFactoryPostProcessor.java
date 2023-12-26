@@ -38,18 +38,16 @@ public class ObscenityRemovingBeanFactoryPostProcessor implements BeanFactoryPos
         String[] beanNames = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanNames) {
             BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
-            StringValueResolver valueResolver = new StringValueResolver() {
-                @Override
-                public String resolveStringValue(String strValue) {
-                    if (isObscene(strValue)) {
-                        return "********";
-                    }
-                    return strValue;
+            StringValueResolver valueResolver = strValue -> {
+                if (isObscene(strValue)) {
+                    return "********";
                 }
+                return strValue;
             };
             BeanDefinitionVisitor visitor = new BeanDefinitionVisitor(valueResolver);
             visitor.visitBeanDefinition(bd);
         }
+        System.out.println("调用 postProcessBeanFactory end");
 
     }
 
