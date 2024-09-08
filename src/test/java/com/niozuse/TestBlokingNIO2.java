@@ -1,4 +1,4 @@
-package com.test.nio.niozuse;
+package com.niozuse;
 
 
 import java.io.IOException;

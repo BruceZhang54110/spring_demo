@@ -1,5 +1,7 @@
-package com.test.nio.niozuse;
+package com.niozuse;
 
+
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -23,6 +25,7 @@ public class TestBlokingNIO {
     /**
      * 客户端
      */
+    @Test
     public void client() throws IOException {
         // 1. 获取通道
         SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", 9898));

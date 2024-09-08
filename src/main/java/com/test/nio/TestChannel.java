@@ -1,6 +1,6 @@
 package com.test.nio;
 
-import org.junit.Test;
+
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -43,7 +43,6 @@ public class TestChannel {
      * 非直接缓冲区
      * 利用通道完成文件复制
      */
-    @Test
     public void test1() throws IOException {
         try(
                 FileInputStream fis = new FileInputStream("E:\\JavaDev\\Test_2.txt");
@@ -72,7 +71,6 @@ public class TestChannel {
     /**
      * 使用直接缓冲区完成文件复制(内存映射文件)
      */
-    @Test
     public void test2() throws IOException {
         try( FileChannel inChannel = FileChannel.open(Paths.get("E:\\JavaDev\\Test_22.txt"),
                 StandardOpenOption.READ);
@@ -100,7 +98,6 @@ public class TestChannel {
      * 通道之间的数据传输
      * transferTo() (也是直接缓冲区的方式)
      */
-    @Test
     public void test3() {
         try( FileChannel inChannel = FileChannel.open(Paths.get("E:\\JavaDev\\Test_22.txt"),
                 StandardOpenOption.READ);
@@ -121,7 +118,6 @@ public class TestChannel {
      * 分散和聚集
      *
      */
-    @Test
     public void test4() {
         try(RandomAccessFile raf1 = new RandomAccessFile("E:\\JavaDev\\Test_22.txt", "rw");
             // 1.获取通道
@@ -150,7 +146,6 @@ public class TestChannel {
         }
     }
 
-    @Test
     public void testCharset() {
         final SortedMap<String, Charset> stringCharsetSortedMap = Charset.availableCharsets();
         Set<Map.Entry<String, Charset>> entries = stringCharsetSortedMap.entrySet();
@@ -160,7 +155,6 @@ public class TestChannel {
 
     }
 
-    @Test
     public void test6() throws CharacterCodingException {
         Charset cs1 = Charset.forName("GBK");
         // 获取编码器

@@ -1,4 +1,4 @@
-package com.at.spring.annntation.bean;
+package com.at.spring.annotation.bean;
 
 import com.test.generic.Inter;
 

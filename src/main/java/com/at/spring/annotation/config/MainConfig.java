@@ -1,6 +1,6 @@
-package com.at.spring.annntation.config;
+package com.at.spring.annotation.config;
 
-import com.at.spring.annntation.bean.Person;
+import com.at.spring.annotation.bean.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
