@@ -12,8 +12,10 @@ public class Test {
 		StarProxy proxy = new StarProxy(liu);
 		
 		//生成代理类
-		Star l = (Star) Proxy.newProxyInstance(Liudehua.class.getClassLoader(), 
-				Liudehua.class.getInterfaces(),
+		Class<?>[] interfaces = Liudehua.class.getInterfaces();
+		System.out.println("interfaces:" + interfaces[0].getName());
+		Star l = (Star) Proxy.newProxyInstance(Liudehua.class.getClassLoader(),
+				interfaces,
 				proxy);
 		l.dance("a");
 		l.sing("l");

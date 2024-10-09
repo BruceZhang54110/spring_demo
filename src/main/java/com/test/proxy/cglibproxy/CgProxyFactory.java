@@ -28,7 +28,7 @@ public class CgProxyFactory implements MethodInterceptor {
     }
 
     public static void main(String[] args) {
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "F:/DEBUG");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./DEBUG");
         CgProxyFactory factory = new CgProxyFactory();
         GeShou geshou = factory.getProxy(GeShou.class);
         geshou.sing();

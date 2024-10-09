@@ -2,6 +2,7 @@
 package com.test.thread.imooc;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 public class MyCallable implements Callable<String> {
 
@@ -9,7 +10,7 @@ public class MyCallable implements Callable<String> {
 	public String call() throws Exception {
 		String value = "test";
 		System.out.println("Ready to work");
-		Thread.sleep(5000);
+		TimeUnit.SECONDS.sleep(10);
 		System.out.println("task done");
 		return value;
 	}

@@ -8,11 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
-
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {DogConfig.class, BirdConfig.class, CatConfig.class})
-public class ConfigUnitTest {
+@ContextConfiguration(classes = AnimalConfiguration.class)
+public class AnimalConfigUnitTest {
 
     @Autowired
     ApplicationContext context;
@@ -22,6 +20,7 @@ public class ConfigUnitTest {
         assertThatBeanExists("dog", Dog.class);
         assertThatBeanExists("cat", Cat.class);
         assertThatBeanExists("bird", Bird.class);
+        assertThatBeanExists("bug", Bug.class);
     }
 
     private void assertThatBeanExists(String beanName, Class<?> beanClass) {
